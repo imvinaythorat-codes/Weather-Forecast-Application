@@ -116,7 +116,7 @@ function forecastCard(date, item) {
         <img alt="icon" class="w-12 h-12" src="${buildIconUrl(item.weather?.[0]?.icon)}" />
         <div>
           <h3 class="font-semibold">${nice}</h3>
-          <p class=\"text-slate-600 dark:text-slate-300\">${escapeHtml(item.weather?.[0]?.main ?? '')}</p>
+          <p class="text-slate-600 dark:text-slate-300">${escapeHtml(item.weather?.[0]?.main ?? '')}</p>
         </div>
       </div>
       <div class="grid grid-cols-3 gap-2 mt-3 text-sm">
@@ -143,7 +143,7 @@ function skeletonCurrent() {
 }
 
 function skeletonForecast() {
-  return `<div class=\"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4\">${Array.from({length:5}).map(()=>'<div class=\"weather-card h-36 animate-pulse\"></div>').join('')}</div>`;
+  return `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">${Array.from({length:5}).map(()=>'<div class="weather-card h-36 animate-pulse"></div>').join('')}</div>`;
 }
 
 function animateIn(container, selector = '.weather-card', stagger = 0) {
