@@ -93,18 +93,47 @@ unitToggle.addEventListener('click', () => {
 geoBtn.addEventListener('click', () => handleGeoSearch());
 
 // Share current city via URL
+async function copyText(text) {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {}
+  // Fallback: temporary textarea + execCommand
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'absolute';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand ? document.execCommand('copy') : false;
+    document.body.removeChild(ta);
+    return ok;
+  } catch { return false; }
+}
+
 if (shareBtn) {
   shareBtn.addEventListener('click', async () => {
     const name = document.querySelector('#current h2')?.textContent?.split(' — ')[0] || cityInput.value.trim();
     if (!name) return;
     const url = new URL(window.location.href);
     url.searchParams.set('city', name);
-    try {
-      await navigator.clipboard.writeText(url.toString());
-      if (live) live.textContent = 'Link copied to clipboard';
-    } catch {
-      // fallback
-      prompt('Copy link', url.toString());
+    const ok = await copyText(url.toString());
+    // Visible feedback
+    const old = shareBtn.textContent;
+    shareBtn.textContent = ok ? 'Copied!' : 'Copy link';
+    shareBtn.classList.add(ok ? 'bg-emerald-600' : 'bg-slate-700');
+    setTimeout(() => {
+      shareBtn.textContent = old;
+      shareBtn.classList.remove('bg-emerald-600', 'bg-slate-700');
+    }, 1500);
+    if (live) live.textContent = ok ? 'Link copied to clipboard' : 'Copy link failed';
+    if (!ok) {
+      // Last fallback: show prompt
+      try { prompt('Copy link', url.toString()); } catch {}
     }
   });
 }
