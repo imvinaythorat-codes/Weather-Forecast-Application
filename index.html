@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Weather Forecast</title>
+    <title>Weather Flo</title>
     <!-- Favicons (use version param to bust cache) -->
     <link rel="icon" href="./favicon.svg?v=2" type="image/svg+xml" sizes="any" />
     <link rel="shortcut icon" href="./favicon.svg?v=2" type="image/svg+xml" />
@@ -37,17 +37,19 @@
         .weather-card { @apply bg-white/90 dark:bg-slate-800/80 backdrop-blur rounded-xl p-4 shadow dark:shadow-black/30 transition-all duration-300; }
         .weather-card:hover { @apply -translate-y-0.5 shadow-lg; }
         .error-box { @apply rounded-md p-3 border border-red-300 bg-red-50 text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-200; }
+        .ball-3d { @apply inline-block align-middle w-6 h-6 md:w-7 md:h-7 rounded-full; background: radial-gradient(35% 35% at 35% 35%, #ffffff 0%, #93c5fd 45%, #1e40af 100%); box-shadow: 0 6px 12px rgba(0,0,0,0.35), inset -4px -6px 10px rgba(0,0,0,0.2); animation: bounce-3d 1.6s ease-in-out infinite; }
       }
       @layer utilities {
         @keyframes fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade-in { animation: fade-in 500ms ease-out both; }
+        @keyframes bounce-3d { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-6px) scale(1.06); } }
       }
     </style>
   </head>
   <body class="min-h-screen bg-gradient-to-b from-slate-900 via-slate-950 to-black text-slate-100 flex flex-col transition-colors duration-500">
     <header class="w-full bg-slate-900/70 backdrop-blur border-b border-white/5">
       <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-        <h1 class="text-2xl md:text-3xl font-bold text-white">Weather Forecast</h1>
+        <h1 class="text-2xl md:text-3xl font-bold text-white flex items-center gap-2"><span aria-hidden="true" class="ball-3d"></span>Weather Flo</h1>
         <div class="flex items-center gap-2">
           <button id="unitToggle" class="px-3 py-1 rounded-md text-sm font-medium bg-slate-700 text-white hover:bg-slate-600 border border-white/10" aria-pressed="false" title="Toggle °C/°F for today's temperature">°C</button>
           <button id="geoBtn" class="px-3 py-1 rounded-md text-sm font-medium bg-brand-500 text-white hover:bg-brand-400">Use my location</button>
