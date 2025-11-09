@@ -1,0 +1,21 @@
+{
+  "name": "weather-forecast-js",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "serve . --listen 5173",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint src --max-warnings 0",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:run": "vitest run"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "jsdom": "^27.1.0",
+    "prettier": "^3.3.3",
+    "serve": "^14.2.3",
+    "vitest": "^2.1.3"
+  }
+}
