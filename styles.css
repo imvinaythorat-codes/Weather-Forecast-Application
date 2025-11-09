@@ -1,0 +1,9 @@
+/* Custom styles in addition to Tailwind utilities */
+
+/* Smooth theme transitions */
+body { transition: background 0.5s ease, color 0.5s ease; }
+
+/* Rainy background mode for the entire page */
+body.rainy {
+  background: linear-gradient(180deg, #0ea5e9 0%, #0b1220 100%);
+}
