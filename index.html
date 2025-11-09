@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Weather Forecast</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: '#eff6ff',
+                100: '#dbeafe',
+                200: '#bfdbfe',
+                300: '#93c5fd',
+                400: '#60a5fa',
+                500: '#3b82f6',
+                600: '#2563eb',
+                700: '#1d4ed8',
+                800: '#1e40af',
+                900: '#1e3a8a'
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="./styles.css" />
+    <style type="text/tailwindcss">
+      @layer components {
+        .weather-card { @apply bg-white/90 dark:bg-slate-800/80 backdrop-blur rounded-xl p-4 shadow dark:shadow-black/30 transition-all duration-300; }
+        .weather-card:hover { @apply -translate-y-0.5 shadow-lg; }
+        .error-box { @apply rounded-md p-3 border border-red-300 bg-red-50 text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-200; }
+      }
+      @layer utilities {
+        @keyframes fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fade-in 500ms ease-out both; }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-gradient-to-b from-slate-900 via-slate-950 to-black text-slate-100 flex flex-col transition-colors duration-500">
+    <header class="w-full bg-slate-900/70 backdrop-blur border-b border-white/5">
+      <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+        <h1 class="text-2xl md:text-3xl font-bold text-white">Weather Forecast</h1>
+        <div class="flex items-center gap-2">
+          <button id="unitToggle" class="px-3 py-1 rounded-md text-sm font-medium bg-slate-700 text-white hover:bg-slate-600 border border-white/10" aria-pressed="false" title="Toggle °C/°F for today's temperature">°C</button>
+          <button id="geoBtn" class="px-3 py-1 rounded-md text-sm font-medium bg-brand-500 text-white hover:bg-brand-400">Use my location</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <section class="max-w-5xl mx-auto px-4 py-6">
+        <form id="searchForm" class="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
+          <label for="cityInput" class="sr-only">City</label>
+          <input id="cityInput" name="city" type="text" placeholder="Search by city (e.g., Dhaka)" class="flex-1 rounded-md px-4 py-2 border border-slate-700 bg-slate-800 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500" autocomplete="off" />
+          <button type="submit" class="px-4 py-2 rounded-md bg-brand-500 text-white hover:bg-brand-400">Search</button>
+          <div class="relative">
+            <label for="recentSelect" class="sr-only">Recently searched</label>
+            <select id="recentSelect" class="hidden md:block px-3 py-2 rounded-md border border-slate-700 bg-slate-800 text-slate-100" title="Recently searched cities">
+              <!-- options injected -->
+            </select>
+          </div>
+        </form>
+
+        <div id="errorBox" class="mt-4 hidden"></div>
+
+        <section id="current" class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4"></section>
+        <section id="forecast" class="mt-8">
+          <h2 class="text-xl font-semibold mb-3 text-slate-200">5-day forecast</h2>
+          <div id="forecastGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4"></div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="bg-slate-900/60 backdrop-blur mt-auto">
+      <div class="max-w-5xl mx-auto px-4 py-4 text-sm text-slate-300">
+        Data from OpenWeatherMap. Built with Tailwind CSS.
+      </div>
+    </footer>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
