@@ -1,7 +1,7 @@
 // API layer for OpenWeatherMap
 // Replace YOUR_OPENWEATHER_API_KEY in README and here before use.
 
-const API_KEY = 'YOUR_OPENWEATHER_API_KEY'; // TODO: insert your key for local testing (do not commit real keys)
+const API_KEY = 'f89062a8ddb3cee873e3732af5e7aad9'; // TODO: insert your key for local testing (do not commit real keys)
 const BASE = 'https://api.openweathermap.org/data/2.5';
 
 export function buildIconUrl(icon) {
