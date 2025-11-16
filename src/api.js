@@ -1,5 +1,3 @@
-// API layer for OpenWeatherMap via Netlify Function proxy
-
 const FN = '/.netlify/functions/weather';
 
 export function buildIconUrl(icon) {
